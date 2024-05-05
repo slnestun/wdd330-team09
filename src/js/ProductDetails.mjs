@@ -3,6 +3,7 @@ import { setLocalStorage, getLocalStorage } from './utils.mjs';
 
 function productDetailsTemplate(product){
   // adding discpunt information:
+  //comment
   const discountAmount = product.SuggestedRetailPrice - product.FinalPrice
   const discountPercentage = ((discountAmount / product.SuggestedRetailPrice) * 100)
   // since I have all information, I return the html template based on one of the tents html
