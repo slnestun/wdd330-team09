@@ -1,5 +1,5 @@
 //This script file will contain the code to dynamically produce the product detail pages.
-import { setLocalStorage } from './utils.mjs';
+import { setLocalStorage, getLocalStorage } from './utils.mjs';
 
 function productDetailsTemplate(product){
 <<<<<<< HEAD
@@ -19,7 +19,8 @@ function productDetailsTemplate(product){
       src="${product.Image}"
       alt="${product.NameWithoutBrand}"
     />
-    <p class="product-card__price">${product.FinalPrice}</p>
+    <p class="product-card__price">$${product.FinalPrice}</p>
+    <p class="product-card__discount">${discountPercentage.toFixed(2)}% off</p>
     <p class="product"__color>${product.Colors[0].ColorName}</p>
     <p class="product__description">${product.DescriptionHtmlSimple}</p>
     <div class="product-detail__add">
@@ -43,8 +44,13 @@ export default class ProductDetails{
     document.getElementById('addToCart').addEventListener('click', this.addToCart.bind(this));
   };
   addToCart(){
+    let cartItems = getLocalStorage('so-cart');
     //Now I do not receive argumnets, therefore I will only receive the object, this.product.
-    setLocalStorage('so-cart', this.product)
+    if (!cartItems) {
+      cartItems = [];
+    }
+    cartItems.push(this.product);
+    setLocalStorage('so-cart', cartItems)
 
  };
  renderProductDetails(selector){
