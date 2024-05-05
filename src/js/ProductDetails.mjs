@@ -2,6 +2,9 @@
 import { setLocalStorage, getLocalStorage } from './utils.mjs';
 
 function productDetailsTemplate(product){
+  // adding discpunt information:
+  const discountAmount = product.SuggestedRetailPrice - product.FinalPrice
+  const discountPercentage = ((discountAmount / product.SuggestedRetailPrice) * 100)
   // since I have all information, I return the html template based on one of the tents html
   return `
   <section class="product-detail">
@@ -12,7 +15,8 @@ function productDetailsTemplate(product){
       src="${product.Image}"
       alt="${product.NameWithoutBrand}"
     />
-    <p class="product-card__price">${product.FinalPrice}</p>
+    <p class="product-card__price">$${product.FinalPrice}</p>
+    <p class="product-card__discount">${discountPercentage.toFixed(2)}% off</p>
     <p class="product"__color>${product.Colors[0].ColorName}</p>
     <p class="product__description">${product.DescriptionHtmlSimple}</p>
     <div class="product-detail__add">
