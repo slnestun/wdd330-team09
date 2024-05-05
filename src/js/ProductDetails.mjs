@@ -1,5 +1,5 @@
 //This script file will contain the code to dynamically produce the product detail pages.
-import { setLocalStorage } from './utils.mjs';
+import { setLocalStorage, getLocalStorage } from './utils.mjs';
 
 function productDetailsTemplate(product){
   // since I have all information, I return the html template based on one of the tents html
@@ -36,8 +36,13 @@ export default class ProductDetails{
     document.getElementById('addToCart').addEventListener('click', this.addToCart.bind(this));
   };
   addToCart(){
+    let cartItems = getLocalStorage('so-cart');
     //Now I do not receive argumnets, therefore I will only receive the object, this.product.
-    setLocalStorage('so-cart', this.product)
+    if (!cartItems) {
+      cartItems = [];
+    }
+    cartItems.push(this.product);
+    setLocalStorage('so-cart', cartItems)
 
  };
  renderProductDetails(selector){
