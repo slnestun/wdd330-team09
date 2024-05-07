@@ -39,16 +39,22 @@ export default class ProductDetails{
     // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
     document.getElementById('addToCart').addEventListener('click', this.addToCart.bind(this));
   };
+
   addToCart(){
     let cartItems = getLocalStorage('so-cart');
-    //Now I do not receive argumnets, therefore I will only receive the object, this.product.
+    // Verificar si cartItems es un objeto y convertirlo en un array si es necesario
+    if (typeof cartItems === 'object' && !Array.isArray(cartItems)) {
+        cartItems = [cartItems];
+    }
+    // Verificar si cartItems es null o undefined y asignar un array vacío en ese caso
     if (!cartItems) {
-      cartItems = [];
+        cartItems = [];
     }
     cartItems.push(this.product);
-    setLocalStorage('so-cart', cartItems)
+    setLocalStorage('so-cart', cartItems);
+}
 
- };
+
  renderProductDetails(selector){
   const element = document.querySelector(selector)
   element.insertAdjacentHTML('afterBegin', productDetailsTemplate(this.product));
