@@ -1,4 +1,5 @@
 //any functionality that needs to be shared between modules can be placed in a utility module.
+//any functionality that needs to be shared between modules can be placed in a utility module.
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -14,6 +15,7 @@ export function getLocalStorage(key) {
 export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
+
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener('touchend', (event) => {

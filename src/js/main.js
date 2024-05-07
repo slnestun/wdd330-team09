@@ -1,8 +1,10 @@
-import ProductData from "./ProductData.mjs";
-import ProductList from "./ProductList.mjs";
+// Import the ProductData module
+import ProductData from './ProductData';
+import ProductListing from './ProductList.mjs';
 
-const dataSource = new ProductData("tents");
-const element = document.querySelector(".product-list");
-const listing = new ProductList("Tents", dataSource, element);
+// Create an instance of the ProductData class
+const dataSource = new ProductData('tents');
+const productListElement = document.querySelector('product-list');
+const productList = new ProductListing('Tents', dataSource , productListElement);
 
-listing.init();
+productList.init();
