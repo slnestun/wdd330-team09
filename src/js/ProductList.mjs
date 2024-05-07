@@ -29,12 +29,10 @@ export default class ProductList {
     this.renderList(filteredList);
     
   };
-
   filterTentsNeeded(list){
     const tentsId = ['344YJ','880RR','985PR','985RF']
     return list.filter(product => tentsId.includes(product.Id))
   }
-  
   // render after doing the first stretch
   renderList(list) {
     //   const htmlStrings = list.map(productCardTemplate);
