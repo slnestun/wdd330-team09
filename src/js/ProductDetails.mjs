@@ -2,9 +2,7 @@
 import { setLocalStorage, getLocalStorage } from './utils.mjs';
 
 function productDetailsTemplate(product){
-    // adding discpunt information:
-    const discountAmount = product.SuggestedRetailPrice - product.FinalPrice
-    const discountPercentage = ((discountAmount / product.SuggestedRetailPrice) * 100)
+ 
   // since I have all information, I return the html template based on one of the tents html
   return `
   <section class="product-detail">
@@ -16,7 +14,6 @@ function productDetailsTemplate(product){
       alt="${product.NameWithoutBrand}"
     />
     <p class="product-card__price">$${product.FinalPrice}</p>
-    <p class="product-card__discount">${discountPercentage.toFixed(2)}% off</p>
     <p class="product"__color>${product.Colors[0].ColorName}</p>
     <p class="product__description">${product.DescriptionHtmlSimple}</p>
     <div class="product-detail__add">
@@ -40,23 +37,63 @@ export default class ProductDetails{
     document.getElementById('addToCart').addEventListener('click', this.addToCart.bind(this));
   };
 
-  addToCart(){
+  addToCart() {
+
+    // we call de so-cart to make a list o save local storage
     let cartItems = getLocalStorage('so-cart');
-    // Verificar si cartItems es un objeto y convertirlo en un array si es necesario
-    if (typeof cartItems === 'object' && !Array.isArray(cartItems)) {
-        cartItems = [cartItems];
-    }
-    // Verificar si cartItems es null o undefined y asignar un array vacío en ese caso
+
+    // If all done it create the list and the const to find 
     if (!cartItems) {
-        cartItems = [];
+      cartItems = [];
     }
-    cartItems.push(this.product);
+    const existingItem = cartItems.find(item => item.Id === this.product.Id);
+
+    //then for the activity, we sum 1 each time press add (in any product)
+    // and call the funcion to sum on the same product and be in the cart after
+    // and if it doesn't there then sum a new one 
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } 
+    else {
+      this.product.quantity = 1;
+      cartItems.push(this.product);
+    }
+
     setLocalStorage('so-cart', cartItems);
+
+    //we call the funtion to sum to the cart the number 
+    //and the product in general to show the total items
+    updateCartQuantity();
+
+    //we call the funtion to save the cart number
+    saveCartQuantity(cartItems);
+  }
+
+  renderProductDetails(selector) {
+    const element = document.querySelector(selector);
+    element.insertAdjacentHTML('afterBegin', productDetailsTemplate(this.product));
+  }
+  
 }
 
+// We this funcion we change the icon number each time press
+// we call the id of html and input the new one number in that
+function updateCartQuantity() {
+  const iconCartSpan = document.querySelector('.icon-cart');
+  if (iconCartSpan) {
+    let cartItems = getLocalStorage('so-cart');
+    let totalQuantity = 0;
+  if (cartItems) {
+      totalQuantity = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
+    }
+    iconCartSpan.innerHTML = totalQuantity;
+  }
+}
 
- renderProductDetails(selector){
-  const element = document.querySelector(selector)
-  element.insertAdjacentHTML('afterBegin', productDetailsTemplate(this.product));
- }
+// with this funtion we save the number to stay 
+function saveCartQuantity(cartItems) {
+  // we get again the total in cart
+  const totalQuantity = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
+  // and we save in the local storage
+  localStorage.setItem('so-cart-quantity', totalQuantity);
 }
