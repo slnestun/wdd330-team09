@@ -45,12 +45,53 @@ export default class ProductDetails{
     if (!cartItems) {
       cartItems = [];
     }
-    cartItems.push(this.product);
-    setLocalStorage('so-cart', cartItems)
+
+    const existingItem = cartItems.find(item => item.Id === this.product.Id);
+    //then for the activity, we sum 1 each time press add (in any product)
+    // and call the funcion to sum on the same product and be in the cart after
+    // and if it doesn't there then sum a new one 
+    if (existingItem) {
+      existingItem.quantity += 1;
+    } 
+    else {
+      this.product.quantity = 1;
+      cartItems.push(this.product);
+    }
+
+    setLocalStorage('so-cart', cartItems);
+
+    //we call the funtion to sum to the cart the number 
+    //and the product in general to show the total items
+    updateCartQuantity();
+
+    //we call the funtion to save the cart number
+    saveCartQuantity(cartItems);
 
  };
  renderProductDetails(selector){
   const element = document.querySelector(selector)
   element.insertAdjacentHTML('afterBegin', productDetailsTemplate(this.product));
  }
+}
+
+// We this funcion we change the icon number each time press
+// we call the id of html and input the new one number in that
+function updateCartQuantity() {
+  const iconCartSpan = document.querySelector('.icon-cart');
+  if (iconCartSpan) {
+    let cartItems = getLocalStorage('so-cart');
+    let totalQuantity = 0;
+  if (cartItems) {
+      totalQuantity = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
+    }
+    iconCartSpan.innerHTML = totalQuantity;
+  }
+}
+
+// with this funtion we save the number to stay 
+function saveCartQuantity(cartItems) {
+  // we get again the total in cart
+  const totalQuantity = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
+  // and we save in the local storage
+  localStorage.setItem('so-cart-quantity', totalQuantity);
 }

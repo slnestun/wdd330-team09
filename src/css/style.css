@@ -110,6 +110,24 @@ button {
   fill: gray;
 }
 
+/*Add colors and padding for the span*/
+.cart span{
+  content:attr(value);
+  font-size:12px;
+  color: #000000;
+  background: rgb(239, 182, 182);
+  border-radius:50%;
+  padding: 0 3px;
+  position:relative;
+  left:-8px;
+  top:-20px;
+  opacity:0.9;
+
+}
+
+header a{
+color: white;
+}
 /* End cart icon styles */
 
 .mission {

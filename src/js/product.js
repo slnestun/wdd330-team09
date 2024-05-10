@@ -8,6 +8,9 @@ const productId = getParams('product');
 const product = new ProductDetails(productId, dataSource)
 product.init();
 
+// we getItem to show the number not the list of card and show on the bag
+document.querySelector(".icon-cart").innerHTML = localStorage.getItem('so-cart-quantity');
+
 // Testing getParams and variables
 // console.log(product.productId);
 // console.log(product.product);
