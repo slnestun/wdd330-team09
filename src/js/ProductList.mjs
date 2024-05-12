@@ -1,6 +1,10 @@
 import { renderListWithTemplate } from './utils.mjs';
 
 function productCardTemplate(product) {
+    // adding discpunt information:
+    const discountAmount = product.SuggestedRetailPrice - product.FinalPrice
+    const discountPercentage = ((discountAmount / product.SuggestedRetailPrice) * 100)
+    // since I have all information, I return the html template based on one of the tents html
   return `<li class="product-card">
   <a href="product_pages/index.html?product=${product.Id}">
   <img
@@ -9,6 +13,7 @@ function productCardTemplate(product) {
   />
   <h3 class="card__brand">${product.Brand.Name}</h3>
   <h2 class="card__name">${product.Name}</h2>
+  <p class="product-card__discount">${discountPercentage.toFixed(2)}% off</p>
   <p class="product-card__price">$${product.FinalPrice}</p></a>
 </li>`;
 }
