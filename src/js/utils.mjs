@@ -69,3 +69,10 @@ export async function loadHeaderFooter() {
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
 }
+
+
+export function capitalize(text) {
+  const firstLetter = text.charAt(0);
+  const rest = text.slice(1);
+  return firstLetter.toUpperCase() + rest;
+}
