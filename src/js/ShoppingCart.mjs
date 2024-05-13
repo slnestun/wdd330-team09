@@ -1,10 +1,10 @@
-import { getLocalStorage } from "./utils.mjs";
+import { getLocalStorage } from './utils.mjs';
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
+      src="${item.Images.PrimaryMedium}"
       alt="${item.Name}"
     />
   </a>
@@ -27,6 +27,6 @@ export default class ShoppingCart {
   renderCartContents() {
     const cartItems = getLocalStorage(this.key);
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-    document.querySelector(this.parentSelector).innerHTML = htmlItems.join("");
+    document.querySelector(this.parentSelector).innerHTML = htmlItems.join('');
   }
 }
