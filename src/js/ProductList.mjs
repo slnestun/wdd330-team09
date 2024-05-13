@@ -6,9 +6,9 @@ function productCardTemplate(product) {
     const discountPercentage = ((discountAmount / product.SuggestedRetailPrice) * 100)
     // since I have all information, I return the html template based on one of the tents html
   return `<li class="product-card">
-  <a href="product_pages/index.html?product=${product.Id}">
+  <a href="/product_pages/index.html?product=${product.Id}">
   <img
-    src="${product.Image}"
+    src="${product.Images.PrimaryMedium}"
     alt="Image of ${product.Name}"
   />
   <h3 class="card__brand">${product.Brand.Name}</h3>
@@ -28,17 +28,17 @@ export default class ProductList {
   }
   async init() {
     // our dataSource will return a Promise...so we can use await to resolve it.
-    const list = await this.dataSource.getData();
-    const filteredList = this.filterTentsNeeded(list);
+    const list = await this.dataSource.getData(this.category);
+    //const filteredList = this.filterTentsNeeded(list);
     // render the list
-    this.renderList(filteredList);
+    this.renderList(list);
     
   };
 
-  filterTentsNeeded(list){
-    const tentsId = ['344YJ','880RR','985PR','985RF']
-    return list.filter(product => tentsId.includes(product.Id))
-  }
+ // filterTentsNeeded(list){
+  //  const tentsId = ['344YJ','880RR','985PR','985RF']
+  //  return list.filter(product => tentsId.includes(product.Id))
+  //}
   
   // render after doing the first stretch
   renderList(list) {
