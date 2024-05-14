@@ -1,6 +1,6 @@
 import ProductData from './ProductData.mjs';
 import ProductList from './ProductList.mjs';
-import {loadHeaderFooter, getParams, capitalize} from './utils.mjs';
+import {loadHeaderFooter, getParams, capitalize, handleResize} from './utils.mjs';
 
 loadHeaderFooter();
 const category = getParams('category');
@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
 listing.init();
+handleResize(() => listing.init());
 
 // we getItem to show the number not the list of card and show on the bag
 document.querySelector('.icon-cart').innerHTML = localStorage.getItem('so-cart-quantity') || 0;

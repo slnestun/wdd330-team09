@@ -1,10 +1,13 @@
 //This script file will contain the code to dynamically produce the product detail pages.
-import { setLocalStorage, getLocalStorage } from './utils.mjs';
+import { setLocalStorage, getLocalStorage, selectProductImage } from './utils.mjs';
 
 function productDetailsTemplate(product){
     // adding discpunt information:
     const discountAmount = product.SuggestedRetailPrice - product.FinalPrice
     const discountPercentage = ((discountAmount / product.SuggestedRetailPrice) * 100)
+    
+    // select the appropriate image based on screen width
+    const productImage = selectProductImage(product);
   // since I have all information, I return the html template based on one of the tents html
   return `
   <section class="product-detail">
@@ -12,7 +15,7 @@ function productDetailsTemplate(product){
     <h2 class="divider">${product.NameWithoutBrand}</h2>
     <img
       class="divider"
-      src="${product.Images.PrimaryLarge}"
+      src="${productImage}"
       alt="${product.NameWithoutBrand}"
     />
     <p class="product-card__price">$${product.FinalPrice}</p>
@@ -39,6 +42,7 @@ export default class ProductDetails{
     // once the HTML is rendered we can add a listener to Add to Cart button
     // Notice the .bind(this). Our callback will not work if we don't include that line. Review the readings from this week on 'this' to understand why.
     document.getElementById('addToCart').addEventListener('click', this.addToCart.bind(this));
+
   };
   addToCart(){
     let cartItems = getLocalStorage('so-cart');

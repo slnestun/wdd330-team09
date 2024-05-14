@@ -1,10 +1,13 @@
-import { getLocalStorage } from './utils.mjs';
+import { getLocalStorage, selectProductImage } from "./utils.mjs";
 
 function cartItemTemplate(item) {
+  // select the appropriate image based on screen width
+  const productImage = selectProductImage(item);
+  //console.log(productImage)
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Images.PrimaryMedium}"
+      src="${productImage}"
       alt="${item.Name}"
     />
   </a>
