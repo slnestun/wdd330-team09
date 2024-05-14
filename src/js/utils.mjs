@@ -26,7 +26,6 @@ export function getParams(param){
   const queryString = window.location.search;
   const urlParams = new URLSearchParams(queryString);
   const product = urlParams.get(param)
-  // console.log(product);
   return product;
 }
 export function renderListWithTemplate(
@@ -68,4 +67,26 @@ export async function loadHeaderFooter() {
 
   renderWithTemplate(headerTemplate, headerElement);
   renderWithTemplate(footerTemplate, footerElement);
+}
+
+//Function to change the image size based on screen view
+export function selectProductImage(product) {
+  const width = window.innerWidth;
+  //console.log(width)
+
+  if (width <= 600) {
+      return product.Images.PrimarySmall;
+  } else if (width <= 900) {
+      return product.Images.PrimaryMedium;
+  } else if (width <= 1200) {
+      return product.Images.PrimaryLarge;
+  } else {
+      return product.Images.PrimaryExtraLarge;
+  }
+  
+}
+
+//event handler to change image when scree size change
+export function handleResize(callback) {
+  window.addEventListener('resize', callback);
 }
