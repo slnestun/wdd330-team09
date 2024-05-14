@@ -1,15 +1,17 @@
+//import the header a footer
+import { getParams, loadHeaderFooter } from './utils.mjs';
 import ProductData from './ProductData.mjs';
-import ProductDetails from './ProductDetails.mjs'
-import { getParams } from './utils.mjs';
+import ProductDetails from './ProductDetails.mjs';
+
+loadHeaderFooter();
 
 const dataSource = new ProductData('tents');
-const productId = getParams('product');
+const productId = getParam('product');
 
-const product = new ProductDetails(productId, dataSource)
+const product = new ProductDetails(productId, dataSource);
 product.init();
-
 // we getItem to show the number not the list of card and show on the bag
-document.querySelector(".icon-cart").innerHTML = localStorage.getItem('so-cart-quantity');
+document.querySelector('.icon-cart').innerHTML = localStorage.getItem('so-cart-quantity');
 
 // Testing getParams and variables
 // console.log(product.productId);
