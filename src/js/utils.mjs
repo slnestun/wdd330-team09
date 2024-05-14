@@ -80,19 +80,21 @@ export function capitalize(text) {
 //Function to change the image size based on screen view
 export function selectProductImage(product) {
   const width = window.innerWidth;
-  //console.log(width)
-
-  if (width <= 600) {
+  if (product.Images) { // We verify which product.Images is defined
+    if (width <= 600) {
       return product.Images.PrimarySmall;
-  } else if (width <= 900) {
+    } else if (width <= 900) {
       return product.Images.PrimaryMedium;
-  } else if (width <= 1200) {
+    } else if (width <= 1200) {
       return product.Images.PrimaryLarge;
-  } else {
+    } else {
       return product.Images.PrimaryExtraLarge;
+    }
+  } else {
+    return ''; // Return the default value if product.Images isn´t defined
   }
-  
 }
+
 
 //event handler to change image when scree size change
 export function handleResize(callback) {
