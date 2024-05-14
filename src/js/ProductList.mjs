@@ -1,14 +1,17 @@
-import { renderListWithTemplate } from './utils.mjs';
+import { renderListWithTemplate, selectProductImage } from './utils.mjs';
 
 function productCardTemplate(product) {
     // adding discpunt information:
     const discountAmount = product.SuggestedRetailPrice - product.FinalPrice
     const discountPercentage = ((discountAmount / product.SuggestedRetailPrice) * 100)
+
+    // select the appropriate image based on screen width
+    const productImage = selectProductImage(product);
     // since I have all information, I return the html template based on one of the tents html
   return `<li class="product-card">
   <a href="/product_pages/index.html?product=${product.Id}">
   <img
-    src="${product.Images.PrimaryMedium}"
+    src="${productImage}"
     alt="Image of ${product.Name}"
   />
   <h3 class="card__brand">${product.Brand.Name}</h3>
