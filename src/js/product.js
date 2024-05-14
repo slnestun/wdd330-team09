@@ -11,7 +11,7 @@ const product = new ProductDetails(productId, dataSource)
 product.init();
 handleResize(() => product.init());
 // we getItem to show the number not the list of card and show on the bag
-document.querySelector(".icon-cart").innerHTML = localStorage.getItem('so-cart-quantity');
+document.querySelector('.icon-cart').innerHTML = localStorage.getItem('so-cart-quantity');
 
 
 // Testing getParams and variables
