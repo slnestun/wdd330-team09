@@ -6,7 +6,7 @@ function productCardTemplate(product) {
     const discountPercentage = ((discountAmount / product.SuggestedRetailPrice) * 100)
     // since I have all information, I return the html template based on one of the tents html
   return `<li class="product-card">
-  <a href="product_pages/index.html?product=${product.Id}">
+  <a href="/product_pages/index.html?product=${product.Id}">
   <img
     src="${product.Images.PrimaryMedium}"
     alt="Image of ${product.Name}"
