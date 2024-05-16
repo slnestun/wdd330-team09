@@ -100,7 +100,3 @@ export function handleResize(callback) {
   window.addEventListener('resize', callback);
 }
 
-export function getElementOrDefaultValue(selector, defaultValue) {
-  const element = document.querySelector(selector);
-  return element ? element : defaultValue;
-}
