@@ -65,12 +65,12 @@ export default class ProductDetails{
 
     setLocalStorage('so-cart', cartItems);
 
+    //we call the funtion to save the cart number
+    saveCartQuantity(cartItems);
+    
     //we call the funtion to sum to the cart the number 
     //and the product in general to show the total items
     updateCartQuantity();
-
-    //we call the funtion to save the cart number
-    saveCartQuantity(cartItems);
 
  };
  renderProductDetails(selector){

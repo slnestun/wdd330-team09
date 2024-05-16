@@ -95,8 +95,12 @@ export function selectProductImage(product) {
   }
 }
 
-
 //event handler to change image when scree size change
 export function handleResize(callback) {
   window.addEventListener('resize', callback);
+}
+
+export function getElementOrDefaultValue(selector, defaultValue) {
+  const element = document.querySelector(selector);
+  return element ? element : defaultValue;
 }
