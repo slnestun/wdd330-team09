@@ -9,4 +9,4 @@ cart.renderCartContents();
 handleResize(() => cart.renderCartContents());
 
 // Get the cart quantity from localStorage
-document.querySelector('.icon-cart').innerHTML = localStorage.getItem('so-cart-quantity');
+document.querySelector('.icon-cart').innerHTML = localStorage.getItem('so-cart-quantity')|| 0;;
