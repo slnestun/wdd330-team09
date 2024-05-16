@@ -1,4 +1,4 @@
-import { getLocalStorage, selectProductImage } from "./utils.mjs";
+import { getLocalStorage, selectProductImage } from './utils.mjs';
 
 function cartItemTemplate(item) {
   // select the appropriate image based on screen width
