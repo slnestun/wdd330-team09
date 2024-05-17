@@ -100,3 +100,21 @@ export function selectProductImage(product) {
 export function handleResize(callback) {
   window.addEventListener('resize', callback);
 }
+
+export function getTotalAmount(localStorage){
+  //getting from so-cart all products
+  const cartData = localStorage.getItem('so-cart')
+
+  //parsing the json string into an object
+  const cartItems = JSON.parse(cartData)
+
+  let totalPrice = 0;
+
+  //Use forEach to add each price and multiply by its quantity
+  cartItems.forEach(item => {
+    totalPrice += item.FinalPrice * item.quantity; 
+  });
+  // console.log(`Hola Perro ${totalPrice}`)
+
+  document.getElementById('total-price').textContent = `USD ${totalPrice}`;
+}
