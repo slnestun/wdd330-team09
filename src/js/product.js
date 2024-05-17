@@ -1,14 +1,15 @@
 import ProductData from './ProductData.mjs';
 import ProductDetails from './ProductDetails.mjs'
-import { getParams, loadHeaderFooter} from './utils.mjs';
+import { getParams, loadHeaderFooter, handleResize} from './utils.mjs';
 
 loadHeaderFooter();
 const dataSource = new ProductData('tents');
 const productId = getParams('product');
 
 const product = new ProductDetails(productId, dataSource)
+//console.log(product)
 product.init();
-
+handleResize(() => product.init());
 // we getItem to show the number not the list of card and show on the bag
 document.querySelector('.icon-cart').innerHTML = localStorage.getItem('so-cart-quantity');
 

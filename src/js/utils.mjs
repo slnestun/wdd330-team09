@@ -70,9 +70,49 @@ export async function loadHeaderFooter() {
   renderWithTemplate(footerTemplate, footerElement);
 }
 
-
+//function to capitalize Strings
 export function capitalize(text) {
   const firstLetter = text.charAt(0);
   const rest = text.slice(1);
   return firstLetter.toUpperCase() + rest;
+}
+
+//Function to change the image size based on screen view
+export function selectProductImage(product) {
+  const width = window.innerWidth;
+  //console.log(width)
+
+  if (width <= 600) {
+      return product.Images.PrimarySmall;
+  } else if (width <= 900) {
+      return product.Images.PrimaryMedium;
+  } else if (width <= 1200) {
+      return product.Images.PrimaryLarge;
+  } else {
+      return product.Images.PrimaryExtraLarge;
+  }
+  
+}
+
+//event handler to change image when scree size change
+export function handleResize(callback) {
+  window.addEventListener('resize', callback);
+}
+
+export function getTotalAmount(localStorage){
+  //getting from so-cart all products
+  const cartData = localStorage.getItem('so-cart')
+
+  //parsing the json string into an object
+  const cartItems = JSON.parse(cartData)
+
+  let totalPrice = 0;
+
+  //Use forEach to add each price and multiply by its quantity
+  cartItems.forEach(item => {
+    totalPrice += item.FinalPrice * item.quantity; 
+  });
+  // console.log(`Hola Perro ${totalPrice}`)
+
+  document.getElementById('total-price').textContent = `USD ${totalPrice}`;
 }
