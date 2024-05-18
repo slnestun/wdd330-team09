@@ -93,6 +93,7 @@ button {
 }
 .divider {
   border-bottom: 2px solid var(--primary-color);
+  padding: inherit;
 }
 /* End utility classes */
 
@@ -216,8 +217,7 @@ color: white;
 }
 
 .cart-card__price {
-  grid-row: 2;
-  grid-column: 3;
+  margin: auto;
 }
 
 @media screen and (min-width: 500px) {
@@ -271,3 +271,24 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+
+
+.quantity-increase, .quantity-decrease {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px; 
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.quantity-increase:hover, .quantity-decrease:hover {
+  background-color: #45a049;
+}
+
+.cart-card__quantity-control{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
