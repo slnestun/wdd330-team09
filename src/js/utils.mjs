@@ -116,5 +116,5 @@ export function getTotalAmount(localStorage){
   });
   // console.log(`Hola Perro ${totalPrice}`)
 
-  document.getElementById('total-price').textContent = `USD ${totalPrice}`;
+  document.getElementById('total-price').textContent = `USD ${totalPrice.toFixed(2)}`;
 }
