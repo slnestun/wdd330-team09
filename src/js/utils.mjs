@@ -60,14 +60,15 @@ async function loadTemplate(path) {
 }
 
 // function to dynamically load the header and footer into a page
-export async function loadHeaderFooter() {
-  const headerTemplate = await loadTemplate('../partials/header.html');
-  const headerElement = document.querySelector('#main-header');
-  const footerTemplate = await loadTemplate('../partials/footer.html');
-  const footerElement = document.querySelector('#main-footer');
+  export async function loadHeaderFooter() {
+    const headerTemplate = await loadTemplate('../partials/header.html');
+    const headerElement = document.querySelector('#main-header');
+    const footerTemplate = await loadTemplate('../partials/footer.html');
+    const footerElement = document.querySelector('#main-footer');
 
-  renderWithTemplate(headerTemplate, headerElement);
-  renderWithTemplate(footerTemplate, footerElement);
+    renderWithTemplate(headerTemplate, headerElement);
+    renderWithTemplate(footerTemplate, footerElement);
+    updateCartIcon()
 }
 
 //function to capitalize Strings
@@ -117,4 +118,21 @@ export function getTotalAmount(localStorage){
   // console.log(`Hola Perro ${totalPrice}`)
 
   document.getElementById('total-price').textContent = `USD ${totalPrice.toFixed(2)}`;
+}
+
+export function updateCartIcon() {
+  return new Promise((resolve, reject) => {
+    const cartItems = getLocalStorage('so-cart');
+    let totalQuantity = 0;
+    if (cartItems) {
+      totalQuantity = cartItems.reduce((total, item) => total + (item.quantity || 1), 0);
+    }
+    const cartIconElement = document.querySelector('.icon-cart');
+    if (cartIconElement) {
+      cartIconElement.innerHTML = totalQuantity;
+      resolve();
+    } else {
+      reject('Element with class .icon-cart not found');
+    }
+  });
 }
