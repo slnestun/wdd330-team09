@@ -12,8 +12,20 @@ function formDataToJSON(formElement) {
 
   return convertedJSON;
 }
+function packageItems(items) {
+  const simplifiedItems = items.map((item) => {
+    console.log(item);
+    return {
+      id: item.Id,
+      price: item.FinalPrice,
+      name: item.Name,
+      quantity: 1,
+    };
+  });
+  return simplifiedItems;
+}
 
-export default class checkoutProcess {
+export default class CheckoutProcess {
   constructor(key, outputSelector) {
     this.key = key;
     this.outputSelector = outputSelector;
@@ -25,26 +37,33 @@ export default class checkoutProcess {
   }
   init() {
     this.list = getLocalStorage(this.key);
+    console.log(this.list)
     this.calculateItemSummary();
   }
 
   calculateItemSummary() {
-    // calculate and display the total amount of the items in the cart, and the number of items.
     const summaryElement = document.querySelector(
       this.outputSelector + ' #cartTotal'
     );
     const itemNumElement = document.querySelector(
       this.outputSelector + ' #num-items'
     );
-    itemNumElement.innerText = this.length;
-    // calculate the toal of all the items in teh cart
-    const amounts = this.list.map((item) => item.finalPrice);
-    this.itemTotal = amounts.reduce((sum, item) => sum + item);
+    // Calculate the total number of items
+    const totalQuantity = this.list.reduce((sum, item) => sum + item.quantity, 0);
+    itemNumElement.innerText = totalQuantity;
+
+    // calculate the total of all the items in the cart
+    const amounts = this.list.map((item) => item.FinalPrice * item.quantity);
+    this.itemTotal = amounts.reduce((sum, item) => sum + item, 0);
     summaryElement.innerText = '$' + this.itemTotal;
   }
   calculateOrdertotal() {
     // calculate the shipping and tax amounts. Then use them to along with the cart total to figure out the order total
-    this. shipping = 10 + (this.list.length - 1) * 2;
+    // Calculate the total quantity of items in the cart
+    const totalQuantity = this.list.reduce((sum, item) => sum + item.quantity, 0);
+    // Calculate shipping based on total quantity
+    
+    this.shipping = 10 + (totalQuantity - 1) * 2;
     this.tax = (this.itemTotal * 0.06).toFixed(2);
     this.orderTotal = (
       parseFloat(this.itemTotal) + 
