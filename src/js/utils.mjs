@@ -136,3 +136,15 @@ export function updateCartIcon() {
     }
   });
 }
+
+// Function to handle newsletter signup
+export function NewsletterSignup() {
+  const newsletterForm = document.querySelector('#newsletter-form');
+  newsletterForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const email = document.querySelector('#email-input').value;
+    const messageElement = document.querySelector('#newsletter-message');
+    messageElement.style.display = 'block';
+    messageElement.textContent = 'Thank you for subscribing to our newsletter!';
+  });
+}
