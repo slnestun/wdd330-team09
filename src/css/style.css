@@ -128,6 +128,40 @@ button {
 header a{
 color: white;
 }
+
+/* CSS styles for the newsletter signup box */
+.newsletter-box {
+  border-top: 2px solid var(--primary-color);
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.newsletter-box h2 {
+  margin-bottom: 10px;
+}
+
+#email-input {
+  padding: 8px;
+  width: 60%;
+  margin-bottom: 10px;
+}
+
+#newsletter-form button {
+  padding: 8px 20px;
+  background-color: #5FB6BD;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#newsletter-form button:hover {
+  background-color: #3c8d94;
+}
+
 /* End cart icon styles */
 
 .mission {
