@@ -1,4 +1,4 @@
-import { getLocalStorage, selectProductImage, getTotalAmount, updateCartIcon } from './utils.mjs';
+import { getLocalStorage, selectProductImage, getTotalAmount } from './utils.mjs';
 
 function cartItemTemplate(item) {
   // select the appropriate image based on screen width
@@ -42,16 +42,7 @@ export default class ShoppingCart {
         cartItems[index].quantity++;
         this.updateLocalStorage(cartItems);
         this.renderCartContents();
-        updateCartIcon();
         getTotalAmount(localStorage);
-        const cartIcon = document.querySelector('.cart svg');
-        cartIcon.classList.add('shake-icon');
-    
-        // Remove the shake animation after it has completed
-        setTimeout(() => {
-          cartIcon.classList.remove('shake-icon');
-        }, 500);
-        
       });
     });
 
@@ -64,7 +55,6 @@ export default class ShoppingCart {
         }
         this.updateLocalStorage(cartItems);
         this.renderCartContents();
-        updateCartIcon();
         getTotalAmount(localStorage);
       });
     });

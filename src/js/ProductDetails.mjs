@@ -71,13 +71,6 @@ export default class ProductDetails{
 
     //we call the funtion to save the cart number
     saveCartQuantity(cartItems);
-    const cartIcon = document.querySelector('.cart svg');
-    cartIcon.classList.add('shake-icon');
-
-    // Remove the shake animation after it has completed
-    setTimeout(() => {
-      cartIcon.classList.remove('shake-icon');
-    }, 500);
 
  };
  renderProductDetails(selector){

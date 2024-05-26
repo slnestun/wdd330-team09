@@ -60,15 +60,14 @@ async function loadTemplate(path) {
 }
 
 // function to dynamically load the header and footer into a page
-  export async function loadHeaderFooter() {
-    const headerTemplate = await loadTemplate('../partials/header.html');
-    const headerElement = document.querySelector('#main-header');
-    const footerTemplate = await loadTemplate('../partials/footer.html');
-    const footerElement = document.querySelector('#main-footer');
+export async function loadHeaderFooter() {
+  const headerTemplate = await loadTemplate('../partials/header.html');
+  const headerElement = document.querySelector('#main-header');
+  const footerTemplate = await loadTemplate('../partials/footer.html');
+  const footerElement = document.querySelector('#main-footer');
 
-    renderWithTemplate(headerTemplate, headerElement);
-    renderWithTemplate(footerTemplate, footerElement);
-    updateCartIcon()
+  renderWithTemplate(headerTemplate, headerElement);
+  renderWithTemplate(footerTemplate, footerElement);
 }
 
 //function to capitalize Strings
@@ -135,16 +134,4 @@ export function updateCartIcon() {
       reject('Element with class .icon-cart not found');
     }
   });
-}
-// Function to handle newsletter signup
-export function NewsletterSignup() {
-  const newsletterForm = document.querySelector('#newsletter-form');
-  newsletterForm.addEventListener('submit', function(event) {
-    event.preventDefault();
-    const email = document.querySelector('#email-input').value;
-    const messageElement = document.querySelector('#newsletter-message');
-    messageElement.style.display = 'block';
-    messageElement.textContent = 'Thank you for subscribing to our newsletter!';
-  });
-
 }
