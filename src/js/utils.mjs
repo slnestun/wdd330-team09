@@ -117,7 +117,7 @@ export function getTotalAmount(localStorage){
   });
   // console.log(`Hola Perro ${totalPrice}`)
 
-  document.getElementById('total-price').textContent = `USD ${totalPrice.toFixed(2)}`;
+ document.getElementById('total-price').textContent = `USD ${totalPrice.toFixed(2)}`;
 }
 
 export function updateCartIcon() {
@@ -136,7 +136,6 @@ export function updateCartIcon() {
     }
   });
 }
-
 // Function to handle newsletter signup
 export function NewsletterSignup() {
   const newsletterForm = document.querySelector('#newsletter-form');
@@ -147,4 +146,5 @@ export function NewsletterSignup() {
     messageElement.style.display = 'block';
     messageElement.textContent = 'Thank you for subscribing to our newsletter!';
   });
+
 }
