@@ -1,3 +1,4 @@
+
 import CheckoutProcess from './CheckoutProcess';
 import { loadHeaderFooter } from './utils.mjs';
 
@@ -16,3 +17,4 @@ document.querySelector('#checkoutSubmit').addEventListener('click', (e) => {
 
   myCheckout.checkout();
 });
+

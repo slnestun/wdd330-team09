@@ -1,3 +1,4 @@
+
 const baseURL = 'http://server-nodejs.cit.byui.edu:3000/';
 // const baseURL = import.meta.env.VITE_SERVER_URL
 //console.log(baseURL)
@@ -24,7 +25,7 @@ export default class ExternalServices {
     const response = await fetch(baseURL + `product/${id}`);
     const data = await convertToJson(response);
     return data.Result;
-  }
+
   async checkout(payload) {
     const options = {
       method: 'POST',
